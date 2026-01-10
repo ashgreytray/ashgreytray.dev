@@ -3,6 +3,16 @@ import { snowAnimation } from './animations.js';
 
 // tip: add "editor.defaultColorDecorators": true to your VSCode settings.json file to make the color-picker work
 const THEMES = {
+	winter: {
+		bgColor: 'rgb(150, 150, 150)',
+		mainColor: '#c0c0c0',
+		selection: '#a0a0a0',
+	},
+	rainy: {
+		bgColor: 'rgb(15, 129, 236)',
+		mainColor: '#a4cdf8',
+		selection: '#3b6d8b',
+	},
 	ocean: {
 		bgColor: 'rgb(15, 129, 236)',
 		mainColor: '#72b6ff',
@@ -27,16 +37,6 @@ const THEMES = {
 		bgColor: 'rgb(9, 95, 92)',
 		mainColor: '#cbe9d1',
 		selection: '#56705a',
-	},
-	rainy: {
-		bgColor: 'rgb(15, 129, 236)',
-		mainColor: '#a4cdf8',
-		selection: '#3b6d8b',
-	},
-	winter: {
-		bgColor: 'rgb(150, 150, 150)',
-		mainColor: '#c0c0c0',
-		selection: '#a0a0a0',
 	},
 };
 
