@@ -6,23 +6,13 @@ import { initPictureColl } from './modules/navigation.js';
 import { initRouting } from './modules/routing.js';
 import { initTooltips } from './modules/utils.js';
 
-function playMusic(e) {
+document.getElementById("blog-tab").addEventListener("click", (e) => {
 	e.preventDefault();
 
 	const audio = document.getElementById("bg-music");
+	audio.paused ? audio.play() : audio.pause();
+});
 
-	if (audio.paused) {
-		audio.play().catch(err => {
-			console.error("Autoplay blocked:", err);
-		});
-	} else {
-		audio.pause();
-		audio.currentTime = 0;
-	}
-}
-
-// target the tab explicitly
-const musicTab = document.getElementById('blog-tab');
 
 musicTab.addEventListener('click', async () => {
 	try {
@@ -118,5 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('grunge-overlay').style.display = 'none';
 	}
 });
+
 
 
