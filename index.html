@@ -487,13 +487,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			<ul id="pr-list">
 				<li>
 					<p class="pr-title">UQ Cyber Introduction to Binary Exploitation (Pwntools)</p>
+					<h3 class="pr-desc" style="font-weight: bold;">Getting Started</h3>
 					<p class="pr-desc">Binary exploitation is all about finding vulnerabilities and using them for your purpose. In the introduction here, the array is given to you, in this particular example you can observe the following, obviously chmod +x "file" to format and ./"file" to run the CTF:</p> <br>
 					<p class="pr-desc">Notice that in this binary, the auth variable sits perfectly after our buf array. This isn't always the case, but you can use Binary Ninja to check it! Using scanf with %s is extremely unsafe, as it lets us write as much data as we want. Your goal is to overflow buf and overwrite the auth variable.</p><br>
 					<a><img src="https://ashgreytray.github.io./ctf-assets/1-pwntools1.png" style="display:block;"></img></a><br>
+					<h3 class="pr-desc" style="font-weight: bold;">What is the CTF saying?</h3>
 					<p class="pr-desc">Okay, let's break this down step by step, as the information in the image suggests we have two parts here, one part which is our buf and the second part which is where we want to write our win condition, our auth variable.</p><br>
 					<p class="pr-desc">In order to reach the win condition we have to full the buf with gibberish, since you are writing alphanumerical to ASCII you can write 44 A's to just fill it up.</p><br>
 					<a><img src="https://ashgreytray.github.io./ctf-assets/3-pwntools1.png" style="display:block;"></img></a>
 					<p class="pr-desc">After doing that we can see that our 7b has turned into 00. This means we can start writing in the auth variable</p><br>
+					<h3 class="pr-desc" style="font-weight: bold;">Our Solution</h3>
 					<p class="pr-desc">Since this is meant to introduce you to pwntools, I'll go into how to do this in using that, first you have to run the following</p><br>
 					<pre><code class="inline-code">
 python3 -m venv venv
@@ -518,6 +521,7 @@ p.interactive()
 					<p class="pr-desc">4. Sends the command you just denoted</p><br>
 					<p class="pr-desc">5. Accesses the code and you can see the result, essentially if you were correct or not</p><br>
 					<p class="pr-desc">Since you've written the code <code class="inline-code">python ctf1.py</code> should show that you have properly completed this CTF :)</p> 
+					<a><img src="https://ashgreytray.github.io./ctf-assets/4-pwntools1.png" style="display:block;"></img></a>
 					
 					
 					<div class="tag-list">
@@ -660,6 +664,7 @@ p.interactive()
 </body>
 
 </html>
+
 
 
 
