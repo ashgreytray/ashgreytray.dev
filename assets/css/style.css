@@ -478,24 +478,11 @@ nav ul li a {
 	transition: 0.3s;
 }
 
-.img-desc:hover {
-	filter: opacity(100%);
-	background: linear-gradient(transparent 50%, black);
-}
 
 .img-container {
 	position: relative;
 }
 
-.row img:hover {
-	filter: brightness(1.5);
-	cursor: pointer;
-}
-
-#photography .row img:hover {
-	filter: brightness(1.2);
-	cursor: default;
-}
 
 .pic-coll:not(:first-of-type) {
 	display: flex;
@@ -732,6 +719,7 @@ body {
     padding: 2px 4px;
     font-family: monospace;
 }
+
 
 
 
