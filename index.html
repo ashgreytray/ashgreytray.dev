@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 								<p class="contact-link"><i class="fa-brands fa-github fa-fw"></i><a href="https://github.com/ashgreytray" target="_blank">GitHub</a></p>
 								<p class="contact-link"><i class="fa-brands fa-instagram fa-fw"></i><a href="https://www.instagram.com/ashgreytray/" target="_blank">Instagram</a></p>
 								<p class="contact-link"><i class="fa-brands fa-discord fa-fw"></i> <a href="https://discord.com/users/1315726695696695307" target="_blank">Discord - ash.flac</a></p>
-								<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a href="#home" id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
+								<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a href="#home" class="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
 							</div>
 						</details>
 					</div>
@@ -475,7 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				<ul id="pr-list">
 				<li>
 					<p class="pr-title">Contacts below</p>
-					<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
+					<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a class="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
 					<p class="pr-desc"><i class="fa-brands fa-linkedin fa-fw"></i><a href="https://www.linkedin.com/in/ash-kaster/" target="_blank">LinkedIn</a></p>
 				</li>
 			</ul>
@@ -726,31 +726,33 @@ p.interactive()
 						<p class="contact-link"><i class="fa-brands fa-discord fa-fw"></i> <a href="https://discord.com/users/1315726695696695307" target="_blank">Discord - ash.flac</a></p>
 						<br>
 						<p>More professional inquiries can go to:</p>
-						<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
+						<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a class="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-const emailLink = document.getElementById("copyEmail");
+const emailLinks = document.querySelectorAll(".copyEmail");
 
-emailLink.addEventListener("click", (e) => {
-  e.preventDefault();
+emailLinks.forEach(emailLink => {
+    emailLink.addEventListener("click", (e) => {
+      e.preventDefault();
 
-  const email = emailLink.dataset.email;
+		const email = emailLink.dataset.email;
 
-  const textarea = document.createElement("textarea");
-  textarea.value = email;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
+		const textarea = document.createElement("textarea");
+		textarea.value = email;
+		document.body.appendChild(textarea);
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
 
-  emailLink.textContent = "Copied!";
-  setTimeout(() => {
-    emailLink.textContent = email;
-  }, 1500);
+		emailLink.textContent = "Copied!";
+		setTimeout(() => {
+			emailLink.textContent = email;
+		}, 1500);
+	});
 });
 </script>
 </body>
