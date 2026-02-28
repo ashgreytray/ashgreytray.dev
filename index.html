@@ -475,7 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				<ul id="pr-list">
 				<li>
 					<p class="pr-title">Contacts below</p>
-					<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a href="#home" id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
+					<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
 					<p class="pr-desc"><i class="fa-brands fa-linkedin fa-fw"></i><a href="https://www.linkedin.com/in/ash-kaster/" target="_blank">LinkedIn</a></p>
 				</li>
 			</ul>
@@ -486,8 +486,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			<h3 class="no-mobile">I will post things here every now and then</h3>
 			<nav class="hide-noscript">
 				<ul class="overflow-fix">
-					<li><a class="tab-active pic-coll-tabs" data-id="Pwntools1">Pwntools1</a></li>
-					<li><a class="pic-coll-tabs" data-id="More">More soon lol</a></li>
+					<li><a class="tab-active pic-coll-tabs" data-id="Pwntools1">Pwntools1!</a></li>
+					<li><a class="pic-coll-tabs" data-id="More">Pieleak1!</a></li>
 				</ul>
 			</nav>
 			<div id="Pwntools1" class="pic-coll">
@@ -726,15 +726,37 @@ p.interactive()
 						<p class="contact-link"><i class="fa-brands fa-discord fa-fw"></i> <a href="https://discord.com/users/1315726695696695307" target="_blank">Discord - ash.flac</a></p>
 						<br>
 						<p>More professional inquiries can go to:</p>
-						<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a href="#home" id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
+						<p class="pr-desc"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i><a id="copyEmail" data-email="contact@ashgreytray.dev">contact@ashgreytray.dev</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+const emailLink = document.getElementById("copyEmail");
+
+emailLink.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const email = emailLink.dataset.email;
+
+  const textarea = document.createElement("textarea");
+  textarea.value = email;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+
+  emailLink.textContent = "Copied!";
+  setTimeout(() => {
+    emailLink.textContent = email;
+  }, 1500);
+});
+</script>
 </body>
 
 </html>
+
 
 
 
