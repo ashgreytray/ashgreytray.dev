@@ -500,7 +500,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					<a><img src="https://ashgreytray.github.io./ctf-assets/1-pwntools1.png" style="display:block;"></img></a><br>
 					<h3 class="pr-desc" style="font-weight: bold;">What is the CTF saying?</h3><br>
 					<p class="pr-desc">Okay, let's break this down step by step, as the information in the image suggests we have two parts here, one part which is our buf and the second part which is where we want to write our win condition, our auth variable.</p><br>
-					<p class="pr-desc">In order to reach the win condition we have to full the buf with gibberish, since you are writing alphanumerical to ASCII you can write 44 A's to just fill it up.</p><br>
+					<p class="pr-desc">In order to reach the win condition we have to fill the buf with gibberish, since you are writing alphanumerical to ASCII you can write 44 A's to just fill it up.</p><br>
 					<a><img src="https://ashgreytray.github.io./ctf-assets/3-pwntools1.png" style="display:block;"></img></a>
 					<p class="pr-desc">After doing that we can see that our 7b has turned into 00. This means we can start writing in the auth variable</p><br>
 					<h3 class="pr-desc" style="font-weight: bold;">Our Solution</h3><br>
@@ -547,7 +547,7 @@ p.interactive()
 					<p class="pr-title">Time for some pie!</p>
 					<h3 class="pr-desc" style="font-weight: bold;">Getting Started</h3><br>
 					<p class="pr-desc">Adding PIE essentailly means addresses are randomised, this gives us a challenge when doing our well...challenge, obviously chmod +x "file" to format it</p> <br>
-					<p class="pr-desc">Since addresses are randomised, we can employ pwndbg, to find out where our leak will be located, which should be at main. using pwndbg pieleak in our terminal, then run, then vmmap to find our main gives us the following: </p><br>
+					<p class="pr-desc">Since addresses are randomised we can employ pwndbg to find out where our leak will be located, which should be at main. Using pwndbg pieleak in our terminal, then run, then vmmap to find our main gives us the following: </p><br>
 					<a><img src="https://ashgreytray.github.io./ctf-assets/1-pieleak1.png" style="display:block;"></img></a><br>
 					<h3 class="pr-desc" style="font-weight: bold;">So What Do I Do Now?</h3><br>
 					<p class="pr-desc">Okay, let's break this down step by step, now that we know what our leak should look like, using %n$p to find our leak gives us %21$p which looks promising:</p><br>
