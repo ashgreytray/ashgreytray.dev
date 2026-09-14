@@ -719,6 +719,54 @@ body {
     padding: 2px 4px;
     font-family: monospace;
 }
+/* ================================
+   MUSIC TRACKER
+   ================================ */
+
+.music-tracker {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.music-tracker h2 {
+    text-align: left;
+}
+
+.music-art {
+    display: block;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin: 10px auto;
+}
+
+.music-track {
+    margin: 4px 0 0 0;
+    font-size: 1.05em;
+}
+
+.music-artist,
+.music-album {
+    margin: 2px 0;
+}
+
+.music-spotify {
+    display: block;
+    width: 100%;
+    max-width: 352px;
+    height: 80px;
+    margin: 14px auto 0 auto;
+    border: 0;
+    border-radius: 12px;
+}
+
+/* Keep the tracker from stretching the entire grid */
+.grid-row-box:has(.music-tracker) {
+    min-width: 0;
+    overflow: hidden;
+}
 
 
 
