@@ -631,96 +631,957 @@ p.interactive()
 						<p>I speak English Natively, 我是华人因此传承语使用者, Ich kann Deutsch wegen der Universität и Я немного говорю по-русски благодаря университету.</p>
 					</div>
 					<div class="grid-row-box">
-						<h2>Soundcloud</h2> 
-						<br><p class="contact-link"><i class="fa-brands fa-soundcloud fa-fw"></i><a href="https://soundcloud.com/ashgreytractor" target="_blank">Soundcloud</a></p>
-						<p>I repost some music here that I like</p> <br>
-    <div id="widget" class="content">
-        <h2 id="playState">Last played was</h2>
-        <p id="loading"></p>
+						<h2>Music I'm Listening To</h2> 
+
+<br>
+
+<p class="contact-link">
+    <i class="fa-brands fa-soundcloud fa-fw"></i>
+    <a
+        href="https://soundcloud.com/ashgreytractor"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Soundcloud
+    </a>
+</p>
+
+<p>I repost some music here that I like</p>
+
+<br>
+
+
+<!-- =========================
+     LAST.FM / SPOTIFY TRACKER
+     ========================= -->
+
+<div
+    id="music-tracker"
+    class="content"
+>
+
+    <h2 id="music-play-state">
+        Loading...
+    </h2>
+
+
+    <div
+        id="music-loading"
+        class="music-loading"
+    >
+        Loading current track...
     </div>
-    <div class="content">
-        <p>
-			<small class="contact-link"><i class="fa-brands fa-github fa-fw"></i><a href="https://github.com/biancarosa/lastfm-last-played" target="_blank">Powered by GitHub</a> | Uses <a href="https://www.last.fm/user/robloxusername" target="_blank">Last.fm</a> </small> 
+
+
+    <div
+        id="music-content"
+        class="music-content"
+        style="display: none;"
+    >
+
+        <!-- ALBUM ART -->
+
+        <img
+            id="music-art"
+            class="music-art"
+            src="/assets/images/image.png"
+            alt="Album artwork"
+        >
+
+
+        <!-- TRACK NAME -->
+
+        <h3
+            id="music-track"
+            class="music-track"
+        >
+            Unknown track
+        </h3>
+
+
+        <!-- ARTIST -->
+
+        <p
+            id="music-artist"
+            class="music-artist"
+        >
+            Unknown artist
         </p>
+
+
+        <!-- ALBUM -->
+
+        <p
+            id="music-album"
+            class="music-album"
+        >
+            Unknown album
+        </p>
+
+
+        <!-- SPOTIFY -->
+
+        <iframe
+            id="music-spotify"
+            class="music-spotify"
+            title="Spotify player"
+            frameborder="0"
+            allowfullscreen
+            allow="
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                fullscreen;
+                picture-in-picture
+            "
+            loading="lazy"
+        ></iframe>
+
     </div>
 
-    <style>
-        /* hide loading symbol once loaded */
-        .hidden {
-            display: none;
+
+    <!-- ERROR -->
+
+    <div
+        id="music-error"
+        class="music-error"
+        style="display: none;"
+    >
+        Unable to load music information.
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MUSIC ATTRIBUTION
+     ========================= -->
+
+<div class="content">
+
+    <p>
+
+        <small class="contact-link">
+
+            <i class="fa-brands fa-lastfm fa-fw"></i>
+
+            Uses
+            <a
+                href="https://www.last.fm/user/robloxusername"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Last.fm
+            </a>
+
+            |
+
+            <i class="fa-brands fa-spotify fa-fw"></i>
+
+            Spotify
+
+        </small>
+
+    </p>
+
+</div>
+
+
+<style>
+
+    /* =========================
+       MUSIC TRACKER
+       ========================= */
+
+    #music-tracker {
+        width: 100%;
+        max-width: 500px;
+    }
+
+
+    .music-loading {
+        opacity: 0.7;
+        margin-top: 10px;
+    }
+
+
+    .music-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        width: 100%;
+    }
+
+
+    /* =========================
+       ALBUM ART
+       ========================= */
+
+    .music-art {
+        width: 250px;
+        height: 250px;
+
+        object-fit: cover;
+
+        display: block;
+
+        margin: 15px auto;
+
+        border-radius: 4px;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+
+
+    /* =========================
+       TRACK INFO
+       ========================= */
+
+    .music-track {
+        margin:
+            5px 0 0 0;
+
+        font-size: 1.25rem;
+
+        font-weight: bold;
+
+        word-break: break-word;
+    }
+
+
+    .music-artist {
+        margin:
+            5px 0 0 0;
+
+        opacity: 0.8;
+
+        word-break: break-word;
+    }
+
+
+    .music-album {
+        margin:
+            3px 0 10px 0;
+
+        opacity: 0.6;
+
+        font-size: 0.9rem;
+
+        word-break: break-word;
+    }
+
+
+    /* =========================
+       SPOTIFY
+       ========================= */
+
+    .music-spotify {
+        width: 100%;
+
+        max-width: 420px;
+
+        height: 152px;
+
+        margin-top: 15px;
+
+        border: 0;
+
+        border-radius: 12px;
+    }
+
+
+    /* =========================
+       ERROR
+       ========================= */
+
+    .music-error {
+        color: inherit;
+
+        opacity: 0.7;
+
+        margin-top: 10px;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 600px) {
+
+        .music-art {
+            width: 200px;
+            height: 200px;
         }
-    </style>
 
-    <script type="text/javascript">
-         console.log('JS connected');
- 
- // ------------Now Playing------------
-  let user = 'robloxusername'; //put your username here
-  let url = 'https://lastfm-last-played.biancarosa.com.br/' + user + '/latest-song';
-  
-  
-  fetch(url)
-      .then(function (response) {
-          return response.json()
-      }).then(function (json) {
-      	console.log(json);
-      	const track = json['track'];
-      	const t = '#text';
-      	const small = '0';
-      	const medium = '1';
-      	const large = '2';
-      	const xl = '3';
-      	
-      	const widget = document.getElementById('widget');
-      	const loading = document.getElementById('loading');
-      	const playTitle = document.getElementById('playState');
-		
-      	const art = document.createElement('img');
-      	art.src = track['image'][large][t];
-      	widget.appendChild(art);
-      	const name = document.createElement('h3');
-      	widget.appendChild(name);
-      	const artist = document.createElement('p');
-      	widget.appendChild(artist);
-      	const album = document.createElement('p');
-      	widget.appendChild(album);
-        //To style each element
-      	// {{selectelement}}.setAttribute('class', {{yourclass}});
-          
-    	//Add info to elements
-        name.innerText = track['name'];
-    	artist.innerText = track['artist'][t];
-    	album.innerText = track['album'][t];
-    	
-		const a = document.getElementById('user');
-		a.setAttribute('href', 'https://www.last.fm/user/' + user);
-  
-    	//hide the loading symbol
-        loading.setAttribute('class', 'hidden');
-    	
-        //play boolean
-    	let playBoo = track['@attr']['nowplaying'];
+        .music-spotify {
+            width: 100%;
+        }
 
-    	console.log(playBoo);
-    	if(playBoo) { //if there's something in play boolean, say 'now playing'
-    		playTitle.innerText = 'Now Playing';
-    	} 
-    	else {
-    		playTitle.innerText = 'Error';
-    	}
-    	
-    	
-      						});
-   						 </script>
-					</div>
-					<div class="grid-row-box">
-						<h2>Social Media</h2>
-								<p class="contact-link"><i class="fa-brands fa-linkedin fa-fw"></i><a href="https://www.linkedin.com/in/ash-kaster/" target="_blank">Linkedin</a></p>
-								<p class="contact-link"><i class="fa-brands fa-github fa-fw"></i><a href="https://github.com/ashgreytray" target="_blank">GitHub</a></p>
-								<p class="contact-link"><i class="fa-brands fa-instagram fa-fw"></i><a href="https://www.instagram.com/ashgreytray/" target="_blank">Instagram</a></p>
-								<p class="contact-link"><i class="fa-brands fa-discord fa-fw"></i> <a href="https://discord.com/users/1315726695696695307" target="_blank">Discord - ash.flac</a></p>
-						
-					</div>
+    }
+
+</style>
+
+
+<script>
+
+    /* =========================
+       MUSIC TRACKER
+       ========================= */
+
+    const musicPlayState =
+        document.getElementById(
+            "music-play-state"
+        );
+
+
+    const musicLoading =
+        document.getElementById(
+            "music-loading"
+        );
+
+
+    const musicContent =
+        document.getElementById(
+            "music-content"
+        );
+
+
+    const musicError =
+        document.getElementById(
+            "music-error"
+        );
+
+
+    const musicArt =
+        document.getElementById(
+            "music-art"
+        );
+
+
+    const musicTrack =
+        document.getElementById(
+            "music-track"
+        );
+
+
+    const musicArtist =
+        document.getElementById(
+            "music-artist"
+        );
+
+
+    const musicAlbum =
+        document.getElementById(
+            "music-album"
+        );
+
+
+    const musicSpotify =
+        document.getElementById(
+            "music-spotify"
+        );
+
+
+    /*
+     * Last.fm username.
+     */
+
+    const lastfmUser =
+        "robloxusername";
+
+
+    /*
+     * Keep track of the current song.
+     */
+
+    let currentMusicKey = "";
+
+
+    /*
+     * Prevent broken Last.fm artwork
+     * from repeatedly triggering Spotify.
+     */
+
+    let spotifyArtworkFallbackUsed =
+        false;
+
+
+    /* =========================
+       SPOTIFY
+       ========================= */
+
+    async function getSpotifyTrack(
+        track,
+        artist
+    ) {
+
+        try {
+
+            const params =
+                new URLSearchParams();
+
+
+            params.set(
+                "track",
+                track
+            );
+
+
+            params.set(
+                "artist",
+                artist
+            );
+
+
+            const response =
+                await fetch(
+                    "/api/spotify?" +
+                    params.toString(),
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Spotify:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                console.error(
+                    "Spotify request failed:",
+                    data
+                );
+
+                return null;
+
+            }
+
+
+            /*
+             * Make sure this response still
+             * belongs to the song currently
+             * displayed.
+             */
+
+            const requestedKey =
+                `${track}|||${artist}`;
+
+
+            if (
+                requestedKey !==
+                currentMusicKey
+            ) {
+
+                return null;
+
+            }
+
+
+            /*
+             * Spotify artwork.
+             *
+             * Only use it as a fallback,
+             * never over a working Last.fm
+             * image.
+             */
+
+            if (
+                spotifyArtworkFallbackUsed &&
+                data.albumImage
+            ) {
+
+                musicArt.src =
+                    data.albumImage;
+
+            }
+
+
+            /*
+             * Spotify embed.
+             */
+
+            if (data.embedUrl) {
+
+                musicSpotify.src =
+                    data.embedUrl;
+
+                musicSpotify.style.display =
+                    "block";
+
+            }
+
+
+            return data;
+
+
+        } catch (error) {
+
+            console.error(
+                "Spotify error:",
+                error
+            );
+
+
+            return null;
+
+        }
+
+    }
+
+
+    /* =========================
+       ARTWORK ERROR
+       ========================= */
+
+    musicArt.addEventListener(
+        "error",
+        async () => {
+
+            /*
+             * Don't retry forever.
+             */
+
+            if (
+                spotifyArtworkFallbackUsed
+            ) {
+
+                musicArt.src =
+                    "/assets/images/image.png";
+
+                return;
+
+            }
+
+
+            spotifyArtworkFallbackUsed =
+                true;
+
+
+            const track =
+                musicTrack.textContent.trim();
+
+
+            const artist =
+                musicArtist.textContent.trim();
+
+
+            if (
+                !track ||
+                !artist ||
+                track === "Unknown track" ||
+                artist === "Unknown artist"
+            ) {
+
+                musicArt.src =
+                    "/assets/images/image.png";
+
+                return;
+
+            }
+
+
+            /*
+             * Last.fm artwork failed.
+             *
+             * Ask Spotify for the same song.
+             */
+
+            const spotifyData =
+                await getSpotifyTrack(
+                    track,
+                    artist
+                );
+
+
+            /*
+             * Spotify doesn't have artwork.
+             */
+
+            if (
+                !spotifyData ||
+                !spotifyData.albumImage
+            ) {
+
+                musicArt.src =
+                    "/assets/images/image.png";
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       LAST.FM
+       ========================= */
+
+    async function updateMusic() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/lastfm",
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Last.fm:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Last.fm request failed"
+                );
+
+            }
+
+
+            const tracks =
+                data?.recenttracks?.track;
+
+
+            if (!tracks) {
+
+                throw new Error(
+                    "No tracks returned by Last.fm."
+                );
+
+            }
+
+
+            /*
+             * Last.fm normally returns an array.
+             */
+
+            const track =
+                Array.isArray(tracks)
+                    ? tracks[0]
+                    : tracks;
+
+
+            if (!track) {
+
+                musicPlayState.textContent =
+                    "Last played was";
+
+
+                musicLoading.textContent =
+                    "Nothing scrobbled yet.";
+
+
+                return;
+
+            }
+
+
+            /* =========================
+               TRACK INFO
+               ========================= */
+
+            const trackName =
+                track.name ||
+                "Unknown track";
+
+
+            const artistName =
+                track.artist?.["#text"] ||
+                track.artist?.name ||
+                "Unknown artist";
+
+
+            const albumName =
+                track.album?.["#text"] ||
+                track.album?.name ||
+                "Unknown album";
+
+
+            /*
+             * Last.fm marks currently
+             * playing tracks with:
+             *
+             * @attr.nowplaying = "true"
+             */
+
+            const isNowPlaying =
+                track?.["@attr"]?.nowplaying ===
+                "true";
+
+
+            /* =========================
+               CURRENT TRACK KEY
+               ========================= */
+
+            currentMusicKey =
+                `${trackName}|||${artistName}`;
+
+
+            /*
+             * New song = allow another
+             * Spotify artwork fallback.
+             */
+
+            spotifyArtworkFallbackUsed =
+                false;
+
+
+            /* =========================
+               DISPLAY STATUS
+               ========================= */
+
+            if (isNowPlaying) {
+
+                musicPlayState.textContent =
+                    "Now Playing";
+
+            } else {
+
+                musicPlayState.textContent =
+                    "Last played was";
+
+            }
+
+
+            /* =========================
+               DISPLAY INFO
+               ========================= */
+
+            musicTrack.textContent =
+                trackName;
+
+
+            musicArtist.textContent =
+                artistName;
+
+
+            musicAlbum.textContent =
+                albumName;
+
+
+            /* =========================
+               SHOW CONTENT
+               ========================= */
+
+            musicLoading.style.display =
+                "none";
+
+
+            musicError.style.display =
+                "none";
+
+
+            musicContent.style.display =
+                "flex";
+
+
+            /* =========================
+               LAST.FM ARTWORK
+               ========================= */
+
+            const images =
+                track.image || [];
+
+
+            let albumImage =
+                "";
+
+
+            /*
+             * Prefer the largest artwork
+             * Last.fm provides.
+             */
+
+            const preferredSizes = [
+                "mega",
+                "extralarge",
+                "large",
+                "medium",
+                "small"
+            ];
+
+
+            for (
+                const size of preferredSizes
+            ) {
+
+                const image =
+                    images.find(
+                        img =>
+                            img.size === size &&
+                            img["#text"]
+                    );
+
+
+                if (
+                    image &&
+                    image["#text"]
+                ) {
+
+                    albumImage =
+                        image["#text"];
+
+                    break;
+
+                }
+
+            }
+
+
+            /*
+             * Try any available artwork
+             * if none of the preferred
+             * sizes existed.
+             */
+
+            if (!albumImage) {
+
+                const fallback =
+                    [...images]
+                        .reverse()
+                        .find(
+                            img =>
+                                img["#text"]
+                        );
+
+
+                if (fallback) {
+
+                    albumImage =
+                        fallback["#text"];
+
+                }
+
+            }
+
+
+            /* =========================
+               USE LAST.FM ARTWORK
+               ========================= */
+
+            if (albumImage) {
+
+                musicArt.src =
+                    albumImage;
+
+            } else {
+
+                /*
+                 * No Last.fm artwork.
+                 *
+                 * Use the local placeholder
+                 * temporarily, then ask Spotify
+                 * for its artwork.
+                 */
+
+                musicArt.src =
+                    "/assets/images/image.png";
+
+
+                spotifyArtworkFallbackUsed =
+                    true;
+
+            }
+
+
+            /* =========================
+               SPOTIFY
+               ========================= */
+
+            const spotifyData =
+                await getSpotifyTrack(
+                    trackName,
+                    artistName
+                );
+
+
+            /*
+             * If Last.fm had no artwork,
+             * Spotify becomes the artwork source.
+             */
+
+            if (
+                !albumImage &&
+                spotifyData?.albumImage
+            ) {
+
+                musicArt.src =
+                    spotifyData.albumImage;
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Music tracker error:",
+                error
+            );
+
+
+            musicPlayState.textContent =
+                "Music tracker";
+
+
+            musicLoading.style.display =
+                "none";
+
+
+            musicContent.style.display =
+                "none";
+
+
+            musicError.textContent =
+                "Unable to load music information.";
+
+
+            musicError.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    /* =========================
+       INITIAL LOAD
+       ========================= */
+
+    updateMusic();
+
+
+    /* =========================
+       UPDATE EVERY 30 SECONDS
+       ========================= */
+
+    setInterval(
+        updateMusic,
+        30000
+    );
+
+</script>
 					<div class="grid-row-box">
 						<h2>Contact</h2>
 						<p>I would prefer Discord for more casual contact: ash.flac for Discord.</p>
