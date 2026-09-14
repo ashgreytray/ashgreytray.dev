@@ -17,7 +17,7 @@
 	<link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 
-	<link rel="stylesheet" href="/assets/css/style.css?v=4"> <!-- increase version after significant changes to prevent browsers from using a old cached version (cache busting) -->
+	<link rel="stylesheet" href="/assets/css/style.css?v=5"> <!-- increase version after significant changes to prevent browsers from using a old cached version (cache busting) -->
 
 	<meta property="og:title" content="ashgreytray">
 	<meta property="og:description" content="ashgreytray's Website For Computing, CTFs, Music & More!">
@@ -647,7 +647,6 @@ p.interactive()
 								<h3 id="music-track" class="music-track"></h3>
 								<p id="music-artist" class="music-artist"></p>
 								<p id="music-album" class="music-album"></p>
-								<iframe id="music-spotify" class="music-spotify" title="Spotify player" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 							</div>
 
 							<p id="music-error" style="display:none;">Could not load music.</p>
@@ -655,7 +654,9 @@ p.interactive()
 
 						<p>
 							<small class="contact-link">
-								Uses <a href="https://www.last.fm/user/robloxusername" target="_blank" rel="noopener noreferrer">Last.fm</a> | <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Spotify</a>
+								<i class="fa-brands fa-github fa-fw"></i>
+								<a href="https://github.com/biancarosa/lastfm-last-played" target="_blank" rel="noopener noreferrer">Powered by GitHub</a>
+								| Uses <a href="https://www.last.fm/user/robloxusername" target="_blank" rel="noopener noreferrer">Last.fm</a>
 							</small>
 						</p>
 					</div>
@@ -680,16 +681,6 @@ p.interactive()
 			</div>
 		</div>
 	<script>
-	async function getSpotifyTrack(track, artist) {
-		const params = new URLSearchParams({ track, artist });
-		const response = await fetch('/api/spotify?' + params.toString());
-		if (!response.ok) throw new Error('Spotify lookup failed');
-		return response.json();
-	}
-
-	let currentMusicKey = '';
-	let spotifyArtworkFallbackUsed = false;
-
 	async function updateMusic() {
 		const loading = document.getElementById('music-loading');
 		const content = document.getElementById('music-content');
@@ -699,74 +690,39 @@ p.interactive()
 		const trackEl = document.getElementById('music-track');
 		const artistEl = document.getElementById('music-artist');
 		const albumEl = document.getElementById('music-album');
-		const spotify = document.getElementById('music-spotify');
 
 		try {
-			const response = await fetch('/api/lastfm');
-			if (!response.ok) throw new Error('Last.fm request failed');
+			const response = await fetch('/api/lastfm', { cache: 'no-store' });
+
+			if (!response.ok) {
+				throw new Error(`Last.fm request failed: ${response.status}`);
+			}
+
 			const data = await response.json();
-			const track = data?.recenttracks?.track?.[0];
+			const song = data?.track;
 
-			if (!track) throw new Error('No recent track found');
-
-			const trackName = track.name || '';
-			const artistName = track.artist?.['#text'] || track.artist?.name || '';
-			const albumName = track.album?.['#text'] || track.album?.name || '';
-			const isNowPlaying = track['@attr']?.nowplaying === 'true';
-			const musicKey = trackName + '|' + artistName;
-
-			currentMusicKey = musicKey;
-			spotifyArtworkFallbackUsed = false;
-
-			state.textContent = isNowPlaying ? 'Now Playing' : 'Last played was';
-			trackEl.textContent = trackName;
-			artistEl.textContent = artistName;
-			albumEl.textContent = albumName || 'Unknown album';
-
-			const images = track.image || [];
-			const lastFmArt =
-				images.find(image => image.size === 'mega')?.['#text'] ||
-				images.find(image => image.size === 'extralarge')?.['#text'] ||
-				images.find(image => image.size === 'large')?.['#text'] ||
-				images.find(image => image.size === 'medium')?.['#text'] ||
-				null;
-
-			if (lastFmArt) {
-				art.src = lastFmArt;
-			} else {
-				art.src = '/assets/images/image.png';
+			if (!song) {
+				throw new Error('No track returned by Last.fm');
 			}
 
-			const spotifyData = await getSpotifyTrack(trackName, artistName);
+			state.textContent = song.nowPlaying ? 'Now Playing' : 'Last played was';
+			trackEl.textContent = song.name || 'Unknown track';
+			artistEl.textContent = song.artist || 'Unknown artist';
+			albumEl.textContent = song.album || 'Unknown album';
 
-			if (currentMusicKey !== musicKey) return;
+			art.onerror = () => {
+				art.onerror = null;
+				art.src = '/assets/images/rain-bg-static.png';
+			};
 
-			if (spotifyData?.embedUrl) {
-				spotify.src = spotifyData.embedUrl;
-				spotify.style.display = 'block';
-			} else {
-				spotify.style.display = 'none';
-			}
-
-			art.addEventListener('error', () => {
-				if (spotifyArtworkFallbackUsed) {
-					art.src = '/assets/images/image.png';
-					return;
-				}
-
-				if (spotifyData?.albumImage) {
-					spotifyArtworkFallbackUsed = true;
-					art.src = spotifyData.albumImage;
-				} else {
-					art.src = '/assets/images/image.png';
-				}
-			}, { once: true });
+			art.src = song.image || '/assets/images/rain-bg-static.png';
 
 			loading.style.display = 'none';
 			error.style.display = 'none';
 			content.style.display = 'block';
+
 		} catch (err) {
-			console.error('Music tracker error:', err);
+			console.error('Last.fm unavailable:', err);
 			loading.style.display = 'none';
 			content.style.display = 'none';
 			error.style.display = 'block';
@@ -776,7 +732,6 @@ p.interactive()
 	updateMusic();
 	setInterval(updateMusic, 30000);
 	</script>
-
 	<script>
 const emailLinks = document.querySelectorAll(".copyEmail");
 
