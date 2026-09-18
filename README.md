@@ -1,5 +1,5 @@
 # Ashgreytray's Website
-[ashgreytray.dev(https://ashgreytray.dev)
+[ashgreytray.dev](https://ashgreytray.dev)
 
 Github Repo forked from the below url
 
